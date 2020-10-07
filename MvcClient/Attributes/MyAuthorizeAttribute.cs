@@ -35,7 +35,7 @@ namespace MvcClient.Attributes
 
         public override void OnAuthorization(System.Web.Mvc.AuthorizationContext filterContext)
         {
-            var claims = filterContext.HttpContext.User.Identity as ClaimsIdentity;
+            var claims = filterContext.HttpContext.User as ClaimsIdentity;
 
             base.OnAuthorization(filterContext);
         }
