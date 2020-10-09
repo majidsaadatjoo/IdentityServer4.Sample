@@ -40,7 +40,7 @@ namespace Identity.Server4.Controllers
             temp.Email = _user.Email;
             var result = await _userManager.CreateAsync(temp, _user.Password);
 
-            if (!result.Succeeded)
+             if (!result.Succeeded)
                 return BadRequest(String.Join(", ", result.Errors));
 
             return Ok();

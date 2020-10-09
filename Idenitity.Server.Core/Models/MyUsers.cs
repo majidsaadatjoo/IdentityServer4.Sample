@@ -9,5 +9,9 @@ namespace Idenitity.Server.Core.Models
     {
         // impelement your Custmize
         //public int Sample { get; set; }
+        public bool IsActive { get; set; }
+        public string FName { get; set; }
+        public string LName { get; set; }
+        public string FullName { get => FName + " " + LName; }
     }
 }

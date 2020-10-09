@@ -16,14 +16,10 @@ namespace Idenitity.Server.Core.Data
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-            .AddJsonFile("appsettings.json")
-            .Build();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("IdentityDbConnetction"));
-            base.OnConfiguring(optionsBuilder); 
+            builder.Entity<MyUsers>().Ignore(p => p.FullName);
+            base.OnModelCreating(builder);  
         }
     }
 }

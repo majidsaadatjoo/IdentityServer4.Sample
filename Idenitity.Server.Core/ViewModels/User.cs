@@ -19,5 +19,8 @@ namespace Idenitity.Server.Core.ViewModels
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+        public bool IsActive { get; set; }
+        public string FName { get; set; }
+        public string LName { get; set; }
     }
 }

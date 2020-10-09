@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Idenitity.Server.Core.Data;
 using Idenitity.Server.Core.Models;
 using Identity.Server.Manager.Configuration;
+using Identity.Server.Manager.Infrastructure;
 using IdentityServer4;
+using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+
 
 namespace Identity.Server4
 {
@@ -38,9 +41,9 @@ namespace Identity.Server4
                 .AddDeveloperSigningCredential()
                 ;
 
+            services.AddTransient<ICustomTokenRequestValidator, MyTokenRequesValidatior>();
 
             services.AddAuthentication()
-
             .AddOpenIdConnect("oidc", "Demo IdentityServer", options =>
             {
                 options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
@@ -67,16 +70,16 @@ namespace Identity.Server4
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 3;
                 options.Password.RequiredUniqueChars = 1;
-
+               
                 // Lockout settings.
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.AllowedForNewUsers = true;
 
                 // User settings.
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                options.User.RequireUniqueEmail = false;
+                options.User.RequireUniqueEmail = true;
                 //options.Password
 
 

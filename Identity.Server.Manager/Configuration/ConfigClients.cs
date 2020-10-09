@@ -19,7 +19,8 @@ namespace Identity.Server.Manager.Configuration
                         new Secret("secret".Sha256())
                     },
                     AllowedScopes = { "Resources", "openid", "profile"},
-             
+                    AccessTokenLifetime = 120,
+                   
                 }
             };
     }
